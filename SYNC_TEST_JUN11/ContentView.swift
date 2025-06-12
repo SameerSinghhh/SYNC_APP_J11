@@ -161,9 +161,7 @@ struct ContentView: View {
                     
                     // Sign in button at bottom
                     VStack(spacing: 20) {
-                        NavigationLink(destination: LoginView(), isActive: $showLoginView) {
-                            EmptyView()
-                        }
+
                         
                         Button(action: {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
@@ -225,6 +223,9 @@ struct ContentView: View {
                 }
             }
             .navigationBarHidden(true)
+            .navigationDestination(isPresented: $showLoginView) {
+                LoginView()
+            }
         }
     }
 }

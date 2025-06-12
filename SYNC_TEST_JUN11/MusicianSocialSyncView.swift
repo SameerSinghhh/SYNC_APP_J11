@@ -14,6 +14,7 @@ struct MusicianSocialSyncView: View {
     @State private var connectedPlatforms: Set<String> = []
     @State private var continueButtonPressed = false
     @State private var skipButtonPressed = false
+    @State private var navigateToUpload = false
     @Environment(\.dismiss) private var dismiss
     
     let socialPlatforms = [
@@ -224,6 +225,7 @@ struct MusicianSocialSyncView: View {
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     continueButtonPressed = false
+                                    navigateToUpload = true
                                 }
                                 
                                 // Handle continue to next step
@@ -288,6 +290,9 @@ struct MusicianSocialSyncView: View {
             }
         }
         .navigationBarHidden(true)
+        .navigationDestination(isPresented: $navigateToUpload) {
+            MusicianUploadView()
+        }
     }
     
     private func togglePlatformConnection(_ platformId: String) {

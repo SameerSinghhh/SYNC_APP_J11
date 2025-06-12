@@ -314,26 +314,24 @@ struct LoginView: View {
                         print("Social sign in tapped")
                         showSocialLogin = true
                     }) {
-                        NavigationLink(destination: SocialLoginView(), isActive: $showSocialLogin) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "person.2.fill")
-                                    .font(.system(size: 16, weight: .medium))
-                                
-                                Text("Continue with Social")
-                                    .font(.system(size: 16, weight: .medium))
-                            }
-                            .foregroundColor(.white.opacity(0.9))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 48)
-                            .background(
-                                RoundedRectangle(cornerRadius: 24)
-                                    .fill(Color.white.opacity(0.15))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 24)
-                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                                    )
-                            )
+                        HStack(spacing: 12) {
+                            Image(systemName: "person.2.fill")
+                                .font(.system(size: 16, weight: .medium))
+                            
+                            Text("Continue with Social")
+                                .font(.system(size: 16, weight: .medium))
                         }
+                        .foregroundColor(.white.opacity(0.9))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 48)
+                        .background(
+                            RoundedRectangle(cornerRadius: 24)
+                                .fill(Color.white.opacity(0.15))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 24)
+                                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                )
+                        )
                     }
                     .padding(.horizontal, 32)
                 }
@@ -341,6 +339,9 @@ struct LoginView: View {
             }
         }
         .navigationBarHidden(true)
+        .navigationDestination(isPresented: $showSocialLogin) {
+            SocialLoginView()
+        }
     }
 }
 
