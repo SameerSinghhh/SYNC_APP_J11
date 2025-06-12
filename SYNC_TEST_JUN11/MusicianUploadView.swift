@@ -15,6 +15,7 @@ struct MusicianUploadView: View {
     @State private var continueButtonPressed = false
     @State private var skipButtonPressed = false
     @State private var selectedTab = 0
+    @State private var navigateToAvailability = false
     @Environment(\.dismiss) private var dismiss
     
     // Music upload states
@@ -265,6 +266,7 @@ struct MusicianUploadView: View {
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     continueButtonPressed = false
+                                    navigateToAvailability = true
                                 }
                                 
                                 // Handle continue to next step
@@ -331,6 +333,9 @@ struct MusicianUploadView: View {
         .navigationBarHidden(true)
         .sheet(isPresented: $showingAddEvent) {
             AddPastEventView(pastEvents: $pastEvents)
+        }
+        .navigationDestination(isPresented: $navigateToAvailability) {
+            MusicianAvailabilityView()
         }
     }
 }
